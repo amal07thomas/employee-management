@@ -1,0 +1,14 @@
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <h2 mat-dialog-title class="mat-dialog-title">Customer Delete Box</h2>
+            <mat-dialog-content>
+                <p class="text-danger">{{data.message}}</p>
+            </mat-dialog-content>
+            <mat-dialog-actions align="end" class="d-flex">
+                <button class="btn btn-dark float-right m-2" mat-button mat-dialog-close>Close</button>
+                <button (click)="deleteCustomer()" class="btn btn-danger float-right" mat-button><i class="fa fa-trash"></i> Delete</button>
+            </mat-dialog-actions>
+        </div>
+    </div>
+</div>

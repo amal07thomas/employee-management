@@ -1,0 +1,46 @@
+<div class="container mt-3">
+    <div class="row">
+        <div class="col">
+            <p class="h3 fw-bold text-danger">Create Customers</p>
+            <p class="fst-italic">A customer is an individual or business that purchases another company's goods or services. Customers are important because they drive revenues; without them, businesses cannot continue to exist.</p>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="row">
+        <div class="col-sm-4">
+            <form (submit)="submitCreate()">
+                <div class="mb-2">
+                    <input type="text" class="form-control" placeholder="First" [(ngModel)]="customer.first" name="first">
+                </div>
+                <div class="mb-2">
+                    <input type="text" class="form-control" placeholder="Last" [(ngModel)]="customer.last" name="last">
+                </div>
+                <div class="mb-2">
+                    <input type="text" class="form-control" placeholder="Company" [(ngModel)]="customer.company" name="company"> 
+                </div>
+                <div class="mb-2">
+                    <input type="text" class="form-control" placeholder="Country" [(ngModel)]="customer.country" name="country">
+                </div>
+                <div class="mb-2">
+                    <input type="email" class="form-control" placeholder="Email" [(ngModel)]="customer.email" name="email">
+                </div>
+                <div class="mb-2 date">
+                    <mat-form-field appearance="outline" class="datePicker">
+                        <mat-label>Choose a date</mat-label>
+                        <input matInput [matDatepicker]="picker" [(ngModel)]="customer.created_at" name="created_at">
+                        <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+                        <mat-datepicker #picker></mat-datepicker>
+                      </mat-form-field>
+                      
+                </div>
+                <div class="mb-2">
+                    <input type="submit" class="btn btn-success" value="Create">
+                    <a routerLink="/" class="btn btn-dark ms-2">Close</a>
+                </div>
+                
+            </form>
+        </div>
+    </div>
+</div>
