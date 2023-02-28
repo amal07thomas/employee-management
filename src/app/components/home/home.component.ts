@@ -4,19 +4,21 @@ import { DeleteModalComponent } from 'src/app/modals/delete-modal/delete-modal.c
 import { CustomerService } from 'src/app/service/customer.service';
 import { MatPaginator} from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
+import { MatSort } from '@angular/material/sort';
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent {
-  displayedColumns: string[] = ['name', 'company', 'country', 'date', 'email', 'edit', 'delete'];
+  displayedColumns: string[] = ['id', 'name', 'company', 'country', 'date', 'email', 'edit', 'delete'];
   customers : any[] = [];
   dataToDeleteModal:any
   public errorMessage!:string;
   searchText!:any;
   dataSource = new MatTableDataSource<any>();
   @ViewChild(MatPaginator) paginator!: MatPaginator;
+  @ViewChild(MatSort) sort!: MatSort;
 
   constructor(
     private customerService: CustomerService,
@@ -31,6 +33,7 @@ export class HomeComponent {
       this.customers = data;
       this.dataSource = new MatTableDataSource<any>(this.customers);
       this.dataSource.paginator = this.paginator;
+      this.dataSource.sort = this.sort;
 
     },(error) =>{
       this.errorMessage = error;
