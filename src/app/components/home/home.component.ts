@@ -1,7 +1,7 @@
 import { Component, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { DeleteModalComponent } from 'src/app/modals/delete-modal/delete-modal.component';
-import { CustomerService } from 'src/app/service/customer.service';
+import { EmployeeService } from 'src/app/service/employee.service';
 import { MatPaginator} from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatSort } from '@angular/material/sort';
@@ -11,8 +11,8 @@ import { MatSort } from '@angular/material/sort';
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent {
-  displayedColumns: string[] = ['id', 'name', 'company', 'country', 'date', 'email', 'edit', 'delete'];
-  customers : any[] = [];
+  displayedColumns: string[] = ['id', 'name', 'lastName', 'phone', 'gender', 'email', 'view', 'edit', 'delete'];
+  employees : any[] = [];
   dataToDeleteModal:any
   public errorMessage!:string;
   searchText!:any;
@@ -21,17 +21,16 @@ export class HomeComponent {
   @ViewChild(MatSort) sort!: MatSort;
 
   constructor(
-    private customerService: CustomerService,
-    private dialogRef: MatDialog
-    ){}
+    private employeeService: EmployeeService,
+    private dialogRef: MatDialog){}
 
   ngOnInit(){
-    this.getAllCustomers();
+    this.getAllEmployees();
   }
-  getAllCustomers(){
-    this.customerService.getAllCustomers().subscribe((data) => {
-      this.customers = data;
-      this.dataSource = new MatTableDataSource<any>(this.customers);
+  getAllEmployees(){
+    this.employeeService.getAllEmployees().subscribe((data: any) => {
+      this.employees = data;
+      this.dataSource = new MatTableDataSource<any>(this.employees.reverse());
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;
 
@@ -39,10 +38,7 @@ export class HomeComponent {
       this.errorMessage = error;
     })
   }
-  deleteCustomer(){
-
-  }
-  openDeleteCustomerModal(customer: any){
+  openDeleteEmployeeModal(customer: any){
     let dialoge = this.dialogRef.open(DeleteModalComponent,{
       width: "390px",
       panelClass: 'confirm-dialog-container',
@@ -54,26 +50,26 @@ export class HomeComponent {
     });
     dialoge.afterClosed().subscribe(result => {
       if(result){
-        this.getAllCustomers();
+        this.getAllEmployees();
       }else{
         console.log(`Dialog result: ${result}`)
 
       }
     })
   }
-  searchCustomer(){
+  searchEmployee(){
     if(this.searchText === ""){
-      this.getAllCustomers();
+      this.getAllEmployees();
     }else{
-      this.customerService.getAllCustomers().subscribe((data) => {
-        this.customers = data;
+      this.employeeService.getAllEmployees().subscribe((data) => {
+        this.employees = data;
       },(error)=>{
         this.errorMessage = error;
       })
-      this.customers = this.customers.filter(item => {
-        return item.first.toLocaleLowerCase().match(this.searchText.toLocaleLowerCase())
+      this.employees = this.employees.filter(item => {
+        return item.empFirstName.toLocaleLowerCase().match(this.searchText.toLocaleLowerCase())
       })
-      this.dataSource = new MatTableDataSource<any>(this.customers);
+      this.dataSource = new MatTableDataSource<any>(this.employees);
       this.dataSource.paginator = this.paginator;
     }
   }

@@ -1,28 +1,33 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { CreateCustomerComponent } from './components/create-customer/create-customer.component';
-import { EditCustomerComponent } from './components/edit-customer/edit-customer.component';
+import { EditEmployeeComponent } from './components/edit-employee/edit-employee.component';
 import { HomeComponent } from './components/home/home.component';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
+import { ViewEmployeeComponent } from './components/view-employee/view-employee.component';
+import { CreateEmployeeComponent } from './components/create-employee/create-employee.component';
 
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'customer/home',
+    redirectTo: 'employee/home',
     pathMatch: 'full'
 
   },
   {
-    path: 'customer/home',
+    path: 'employee/home',
     component: HomeComponent
   },
   {
-    path: 'customer/edit/:customerId',
-    component: EditCustomerComponent
+    path: 'employee/edit/:employeeId',
+    component: EditEmployeeComponent
   },
   {
-    path: 'customer/add',
-    component: CreateCustomerComponent
+    path: 'employee/add',
+    component: CreateEmployeeComponent
+  },
+  {
+    path: 'employee/view/:employeeId',
+    component: ViewEmployeeComponent
   },
   {
     path: '**',

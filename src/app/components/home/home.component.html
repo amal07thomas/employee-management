@@ -6,10 +6,10 @@
                     <div class="col-md-6">
                         <div class="row">
                             <div class="col">
-                                <input type="text" [(ngModel)]="searchText" (ngModelChange)="searchCustomer()"  class="form-control" placeholder="Search Customer">
+                                <input type="text" [(ngModel)]="searchText" (ngModelChange)="searchEmployee()"  class="form-control" placeholder="Search Employee">
                             </div>
                             <div class="col">
-                              <button routerLink="/customer/add" class="btn btn-secondary"><li class="fa fa-plus"></li> Create Customer</button>
+                              <button routerLink="/employee/add" class="btn btn-secondary"><li class="fa fa-plus"></li> Create Employee</button>
                           </div>
                         </div>
                     </div>
@@ -24,49 +24,62 @@
     <!-- ID Column -->
     <ng-container matColumnDef="id">
       <th mat-header-cell *matHeaderCellDef> ID </th>
-      <td mat-cell *matCellDef="let customer"> {{customer.id}} </td>
+      <td mat-cell *matCellDef="let employee"> {{employee.id}} </td>
     </ng-container>
 
      <!-- Name Column -->
      <ng-container matColumnDef="name">
       <th mat-header-cell *matHeaderCellDef> Name </th>
-      <td mat-cell *matCellDef="let customer"> {{customer.first}} </td>
+      <td class="viewEmp" mat-cell  *matCellDef="let employee"> {{employee.empFirstName}} </td>
     </ng-container>
+
+    <!-- Last Name Column -->
+    <ng-container matColumnDef="lastName">
+      <th mat-header-cell *matHeaderCellDef> Last Name </th>
+      <td mat-cell *matCellDef="let employee"> {{employee.empLastName}} </td>
+    </ng-container>
+
+    <!-- Dob Column
+    <ng-container matColumnDef="dob">
+      <th mat-header-cell *matHeaderCellDef> DOB </th>
+      <td mat-cell *matCellDef="let employee"> {{employee.empDateOfBirth  }} </td>
+    </ng-container> -->
   
-    <!-- Company Column -->
-    <ng-container matColumnDef="company">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header> Company </th>
-      <td mat-cell *matCellDef="let customer"> {{customer.company}} </td>
+    <!-- Phone Column -->
+    <ng-container matColumnDef="phone">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Phone </th>
+      <td mat-cell *matCellDef="let employee"> {{employee.empPhoneNumber}} </td>
     </ng-container>
   
     <!-- Country Column -->
-    <ng-container matColumnDef="country">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header> Country </th>
-      <td mat-cell *matCellDef="let customer"> {{customer.country}} </td>
+    <ng-container matColumnDef="gender">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Gender </th>
+      <td mat-cell *matCellDef="let employee"> {{employee.empGender}} </td>
     </ng-container>
 
-    <!-- Date Column -->
-    <ng-container matColumnDef="date">
-      <th mat-header-cell *matHeaderCellDef> Date </th>
-      <td mat-cell *matCellDef="let customer"> {{customer.created_at | date: 'MMM dd, y'	}} </td>
-    </ng-container>
   
     <!-- Email Column -->
     <ng-container matColumnDef="email">
       <th mat-header-cell *matHeaderCellDef> Email </th>
-      <td mat-cell *matCellDef="let customer"> {{customer.email}} </td>
+      <td mat-cell *matCellDef="let employee"> {{employee.empEmailId}} </td>
     </ng-container>
+
+     <!-- View Column -->
+     <ng-container matColumnDef="view">
+      <th mat-header-cell *matHeaderCellDef> View </th>
+      <td routerLink="/employee/view/{{employee.id}}" mat-cell *matCellDef="let employee"> <li class="fa fa-eye icon-eye"></li> </td>
+  </ng-container>
 
     <!-- Edit Column -->
     <ng-container matColumnDef="edit">
         <th mat-header-cell *matHeaderCellDef> Edit </th>
-        <td routerLink="/customer/edit/{{customer.id}}" mat-cell *matCellDef="let customer"> <li class="fa fa-edit icon-edit"></li> </td>
+        <td routerLink="/employee/edit/{{employee.id}}" mat-cell *matCellDef="let employee"> <li class="fa fa-edit icon-edit"></li> </td>
     </ng-container>
 
      <!-- Delete Column -->
      <ng-container matColumnDef="delete">
         <th mat-header-cell *matHeaderCellDef> Delete </th>
-        <td  mat-cell *matCellDef="let customer" (click)="openDeleteCustomerModal(customer)"><i class="fa fa-trash icon-delete"></i> </td>
+        <td  mat-cell *matCellDef="let employee" (click)="openDeleteEmployeeModal(employee)"><i class="fa fa-trash icon-delete"></i> </td>
     </ng-container>
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
@@ -76,7 +89,7 @@
   <mat-paginator 
       [pageSize]="10" 
       [pageSizeOptions]="[5, 10, 20, 30]"
-      [showFirstLastButtons]="true">
+      showFirstLastButtons="true">
 </mat-paginator>
 
 

@@ -5,30 +5,31 @@ import { catchError, Observable, throwError } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
-export class CustomerService {
+export class EmployeeService {
 
   public serverUrl: string = 'http://localhost:3000'; // json server url
+  // public serverUrl: string = 'http://15.207.222.215:8080';
   constructor(private httpClient: HttpClient) { }
 
-  public getAllCustomers(): Observable<any[]>{
-    let dataUrl: string = `${this.serverUrl}/customer`;
+  public getAllEmployees(): Observable<any[]>{
+    let dataUrl: string = `${this.serverUrl}/employee`;
     return this.httpClient.get<any[]>(dataUrl).pipe(catchError(this.handleError));
   }
-  public deleteCustomer(customerId: string): Observable<{}>{
-    let dataUrl: string = `${this.serverUrl}/customer/${customerId}`;
+  public deleteEmployee(employeeId: string): Observable<{}>{
+    let dataUrl: string = `${this.serverUrl}/employee/${employeeId}`;
     return this.httpClient.delete<{}>(dataUrl).pipe(catchError(this.handleError));
   }
-  public updateCustomer(customer: any,customerId: number): Observable<any>{
-    let dataUrl: string = `${this.serverUrl}/customer/${customerId}`;
-    return this.httpClient.put<any>(dataUrl,customer).pipe(catchError(this.handleError));
+  public updateEmployee(employee: any,employeeId: number): Observable<any>{
+    let dataUrl: string = `${this.serverUrl}/employee/${employeeId}`;
+    return this.httpClient.put<any>(dataUrl,employee).pipe(catchError(this.handleError));
   }
-  public GetCustomerById(customerId: string): Observable<any>{
-    let dataUrl = `${this.serverUrl}/customer/${customerId}`;
+  public GetEmployeeById(employeeId: string): Observable<any>{
+    let dataUrl = `${this.serverUrl}/employee/${employeeId}`;
     return this.httpClient.get<any>(dataUrl).pipe(catchError(this.handleError));
   }
-  public createCustomer(customer: any): Observable<any>{
-    let dataUrl: string = `${this.serverUrl}/customer`;
-    return this.httpClient.post<any>(dataUrl,customer).pipe(catchError(this.handleError));
+  public createEmployee(employee: any): Observable<any>{
+    let dataUrl: string = `${this.serverUrl}/employee`;
+    return this.httpClient.post<any>(dataUrl,employee).pipe(catchError(this.handleError));
   }
   
   public handleError(error: HttpErrorResponse){

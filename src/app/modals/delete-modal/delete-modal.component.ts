@@ -1,6 +1,6 @@
 import { Component, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA,MatDialogRef } from '@angular/material/dialog';
-import { CustomerService } from 'src/app/service/customer.service';
+import { EmployeeService } from 'src/app/service/employee.service';
 
 @Component({
   selector: 'app-delete-modal',
@@ -8,29 +8,29 @@ import { CustomerService } from 'src/app/service/customer.service';
   styleUrls: ['./delete-modal.component.scss']
 })
 export class DeleteModalComponent {
-  public deletedCustomer: any;
+  public deletedEmployee: any;
   public customers: any;
   public errorMessage!:string;
   constructor(@Inject(MAT_DIALOG_DATA) public data:any,
   private dialogRef: MatDialogRef<DeleteModalComponent>,
-  private customerService:CustomerService
+  private employeeService:EmployeeService
   ){
-    this.deletedCustomer = data.customer;
+    this.deletedEmployee = data.customer;
   }
   ngOnInit(){
-    this.getAllCustomers();
+    this.getAllEmployees();
   }
-  getAllCustomers(){
-    this.customerService.getAllCustomers().subscribe((data)=>{
+  getAllEmployees(){
+    this.employeeService.getAllEmployees().subscribe((data)=>{
       this.customers = data;
     },(error)=>{
       this.errorMessage = error;
     })
   }
-  deleteCustomer(){
-    console.log(this.deletedCustomer);
-    this.customerService.deleteCustomer(this.deletedCustomer.id).subscribe((data)=>{
-      this.getAllCustomers();
+  deleteEmployee(){
+    console.log(this.deletedEmployee);
+    this.employeeService.deleteEmployee(this.deletedEmployee.id).subscribe((data)=>{
+      this.getAllEmployees();
     },(error) =>{
       this.errorMessage = error;
     })

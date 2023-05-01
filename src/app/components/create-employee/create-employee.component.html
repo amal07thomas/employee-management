@@ -1,0 +1,119 @@
+<div class="container mt-3">
+    <div class="row">
+        <div class="col">
+            <p class="h5 fw-bold text-danger">Create Employee</p>
+        </div>
+    </div>
+</div>
+<form [formGroup]="employeeForm" (ngSubmit)="submitCreate()">
+<div class="row column1">
+    <div class="col">
+        <div>
+           <mat-form-field class="fieldLength">
+            <mat-label>First Name</mat-label>
+            <input formControlName="empFirstName" matInput>
+            <mat-error *ngIf="emptyFirstName">First Name Required</mat-error>
+           </mat-form-field>
+        </div>
+        <div>
+            <mat-form-field class="fieldLength">
+             <mat-label>Last Name</mat-label>
+             <input formControlName="empLastName" matInput>
+             <mat-error *ngIf="emptyLastName">Last Name Required</mat-error>
+            </mat-form-field>
+         </div>
+        <div>
+            <mat-form-field class="fieldLength">
+                <mat-label>Gender</mat-label>
+                <mat-select formControlName="empGender" [(ngModel)]="selectedItem">
+                    <mat-option *ngFor="let item of genderList" [value]="item">{{item}}</mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+        <div>
+            <mat-form-field appearance="fill" class="datePicker">
+                <mat-label>Date of Birth</mat-label>
+                <input [max]="today" matInput [matDatepicker]="picker" formControlName="empDateOfBirth">
+                <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+            </mat-form-field>
+        </div>
+        <div >
+            <mat-form-field class="fieldLength">
+                <mat-label>Phone</mat-label>
+                <input (keypress)="numberOnly($event)" formControlName="empPhoneNumber" maxlength="10" minlength="10" matInput>
+                <div class="error-message" *ngIf="userPhoneExists">Phone Already Exist</div>
+                <mat-error *ngIf="emptyPhone">Phone Number Required</mat-error>
+            </mat-form-field>
+        </div>
+        <div>
+            <mat-form-field class="fieldLength">
+                <mat-label>Email</mat-label>
+                <input formControlName="empEmailId" matInput>
+                <div class="error-message" *ngIf="userEmailExists">Email Already Exist</div>
+                <mat-error *ngIf="emptyEmail">Email Required</mat-error>
+            </mat-form-field>
+        </div>
+       
+        <div>
+            <mat-form-field class="fieldLength">
+                <mat-label>Address 1</mat-label>
+                <input formControlName="empHomeAddrLine1"  matInput>
+            </mat-form-field>
+        </div>
+    </div>
+    <div class="col column1">
+        <div>
+            <mat-form-field class="fieldLength">
+                <mat-label>Address 2</mat-label>
+                <input formControlName="empHomeAddrLine2" matInput>
+            </mat-form-field>
+        </div>
+        <div>
+            <mat-form-field class="fieldLength">
+                <mat-label>Street</mat-label>
+                <input formControlName="empHomeAddrStreet" matInput>
+            </mat-form-field>
+        </div>
+        <div>
+            <mat-form-field class="fieldLength">
+                <mat-label>District</mat-label>
+                <input formControlName="empHomeAddrDistrict" matInput>
+            </mat-form-field>
+        </div>
+        <div>
+            <mat-form-field class="fieldLength">
+                <mat-label>State</mat-label>
+                <input formControlName="empHomeAddrState" matInput>
+            </mat-form-field>
+        </div>
+        
+        <div>
+        <mat-form-field appearance="fill" class="datePicker">
+            <mat-label>Date of Joining</mat-label>
+            <input [max]="today" matInput [matDatepicker]="datepicker" formControlName="empDateOfJoining">
+            <mat-datepicker-toggle matIconSuffix [for]="datepicker"></mat-datepicker-toggle>
+            <mat-datepicker #datepicker>
+            </mat-datepicker>
+          </mat-form-field>
+        </div>
+        
+        <div>
+            <mat-form-field class="fieldLength">
+                <mat-label>Country</mat-label>
+                <input formControlName="empHomeAddrCountry" matInput>
+            </mat-form-field>
+        </div>
+        <div>
+            <mat-form-field class="fieldLength">
+                <mat-label>Pincode</mat-label>
+                <input formControlName="empHomeAddrPinCode" matInput (keypress)="numberOnly($event)">
+            </mat-form-field>
+        </div>
+    </div>
+</div>
+<div class="buttons">
+    <button class="btn btn-success"><li class="fa fa-plus"></li> Create</button>
+    <button routerLink="/" class="btn btn-dark ms-2"><li class="fa fa-close"></li> Close</button>
+</div>
+</form>

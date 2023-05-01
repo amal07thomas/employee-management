@@ -14,17 +14,18 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatRippleModule } from '@angular/material/core';
 import { MatDialogModule } from '@angular/material/dialog';
 import { DeleteModalComponent } from './modals/delete-modal/delete-modal.component';
-import { EditModalComponent } from './modals/edit-modal/edit-modal.component';
 import { MdbModalModule } from 'mdb-angular-ui-kit/modal';
 import { MatPaginatorModule } from '@angular/material/paginator';
-import { FormsModule } from '@angular/forms';
+import { FormsModule,ReactiveFormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { EditCustomerComponent } from './components/edit-customer/edit-customer.component';
-import { CreateCustomerComponent } from './components/create-customer/create-customer.component';
+import { EditEmployeeComponent } from './components/edit-employee/edit-employee.component';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatInputModule } from '@angular/material/input';
 import { MatSortModule } from '@angular/material/sort';
+import { MatSelectModule } from '@angular/material/select';
+import { ViewEmployeeComponent } from './components/view-employee/view-employee.component';
+import { CreateEmployeeComponent } from './components/create-employee/create-employee.component';
 
 
 @NgModule({
@@ -34,9 +35,9 @@ import { MatSortModule } from '@angular/material/sort';
     PageNotFoundComponent,
     HomeComponent,
     DeleteModalComponent,
-    EditModalComponent,
-    EditCustomerComponent,
-    CreateCustomerComponent,
+    EditEmployeeComponent,
+    ViewEmployeeComponent,
+    CreateEmployeeComponent,
   ],
   imports: [
     BrowserModule,
@@ -55,7 +56,9 @@ import { MatSortModule } from '@angular/material/sort';
     MatDatepickerModule,
     MatNativeDateModule,
     MatInputModule,
-    MatSortModule
+    MatSortModule,
+    ReactiveFormsModule,
+    MatSelectModule
   ],
   providers: [],
   bootstrap: [AppComponent]
