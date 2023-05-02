@@ -3,6 +3,7 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { Employee } from 'src/app/models/Employee';
 import { EmployeeService } from 'src/app/service/employee.service';
+import { DatePipe } from '@angular/common'
 
 @Component({
   selector: 'app-edit-customer',
@@ -15,10 +16,13 @@ export class EditEmployeeComponent {
   public genderList:any;
   public errorMessage!: string;
   public today =new Date();
+  public empDob:any;
+  public empDoj:any;
   constructor(private activeRoute : ActivatedRoute,
     private employeeService: EmployeeService,
     private router: Router,
-    private builder: FormBuilder){}
+    private builder: FormBuilder,
+    public datepipe: DatePipe){}
     employeeForm = this.builder.group({
       empFirstName:this.builder.control('',Validators.required),
       empLastName:this.builder.control('',Validators.required),
@@ -36,15 +40,16 @@ export class EditEmployeeComponent {
       empHomeAddrPinCode: this.builder.control('',Validators.nullValidator),
     });
   ngOnInit(){
-    this.genderList = ['Male','Female','Other'];
+    this.genderList = ['MALE','FEMALE','OTHER'];
     this.activeRoute.paramMap.subscribe((param: ParamMap)=> {
       this.employeeId = param.get('employeeId');
-      console.log(this.employeeId);
     })
     if(this.employeeId){
       this.employeeService.GetEmployeeById(this.employeeId).subscribe((data: any)=> {
         this.employee = data;
-        console.log(this.employee);
+        if(this.employeeForm.value.empDateOfBirth){}
+        this.empDob = new Date(this.employee.empDateOfBirth);
+        this.empDoj = new Date(this.employee.empDateOfJoining);
       },(error)=>{
         this.errorMessage = error;
       })
@@ -56,17 +61,15 @@ export class EditEmployeeComponent {
       return false;
     }
     return true;
-
   }
   updateEmployee(){
     if(this.employeeId){
-      debugger
-      this.employeeService.updateEmployee(this.employee,this.employeeId).subscribe((data: any)=> {
-        debugger
+      this.employeeForm.value.empDateOfBirth = this.datepipe.transform(this.employeeForm.value.empDateOfBirth, 'dd-MM-yyyy');
+      this.employeeForm.value.empDateOfJoining = this.datepipe.transform(this.employeeForm.value.empDateOfJoining, 'dd-MM-yyyy');
+      this.employeeService.updateEmployee(this.employeeForm.value,this.employeeId).subscribe((data: any)=> {
         this.router.navigate(['/']).then();
       },(error)=>{
         this.errorMessage = error;
-        debugger
         this.router.navigate([`/employee/edit/${this.employeeId}`]).then();
   
       });

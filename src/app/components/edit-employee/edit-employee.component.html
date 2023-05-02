@@ -12,19 +12,19 @@
         <div>
            <mat-form-field class="fieldLength">
             <mat-label>First Name</mat-label>
-            <input formControlName="empFirstName" [(ngModel)]="this.employee.empFirstName"  matInput>
+            <input formControlName="empFirstName" [(ngModel)]="employee.empFirstName"  matInput>
            </mat-form-field>
         </div>
         <div>
             <mat-form-field class="fieldLength">
              <mat-label>Last Name</mat-label>
-             <input formControlName="empLastName" [(ngModel)]="this.employee.empLastName" matInput>
+             <input formControlName="empLastName" [(ngModel)]="employee.empLastName" matInput>
             </mat-form-field>
          </div>
         <div>
             <mat-form-field class="fieldLength">
                 <mat-label>Gender</mat-label>
-                <mat-select formControlName="empGender" [(ngModel)]="this.employee.empGender">
+                <mat-select formControlName="empGender" [(ngModel)]="employee.empGender">
                     <mat-option *ngFor="let item of genderList" [value]="item">{{item}}</mat-option>
                 </mat-select>
             </mat-form-field>
@@ -34,7 +34,7 @@
                 <mat-label>Date of Birth</mat-label>
                 <input [max]="today" matInput [matDatepicker]="picker" 
                 formControlName="empDateOfBirth"
-                [(ngModel)]="this.employee.empDateOfBirth">
+                [(ngModel)]="empDob">
                 <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
                 <mat-datepicker #picker></mat-datepicker>
             </mat-form-field>
@@ -46,14 +46,14 @@
                 formControlName="empPhoneNumber" 
                 maxlength="10" 
                 minlength="10" 
-                [(ngModel)]="this.employee.empPhoneNumber"
+                [(ngModel)]="employee.empPhoneNumber"
                 matInput>
             </mat-form-field>
         </div>
         <div>
             <mat-form-field class="fieldLength">
                 <mat-label>Email</mat-label>
-                <input formControlName="empEmailId"  [(ngModel)]="this.employee.empEmailId" matInput>
+                <input formControlName="empEmailId"  [(ngModel)]="employee.empEmailId" matInput>
             </mat-form-field>
         </div>
        
@@ -61,7 +61,7 @@
             <mat-form-field class="fieldLength">
                 <mat-label>Address 1</mat-label>
                 <input formControlName="empHomeAddrLine1"  
-                [(ngModel)]="this.employee.empHomeAddrLine1"
+                [(ngModel)]="employee.empHomeAddrLine1"
                 matInput>
             </mat-form-field>
         </div>
@@ -70,25 +70,25 @@
         <div>
             <mat-form-field class="fieldLength">
                 <mat-label>Address 2</mat-label>
-                <input formControlName="empHomeAddrLine2" [(ngModel)]="this.employee.empHomeAddrLine2" matInput>
+                <input formControlName="empHomeAddrLine2" [(ngModel)]="employee.empHomeAddrLine2" matInput>
             </mat-form-field>
         </div>
         <div>
             <mat-form-field class="fieldLength">
                 <mat-label>Street</mat-label>
-                <input formControlName="empHomeAddrStreet" [(ngModel)]="this.employee.empHomeAddrStreet" matInput>
+                <input formControlName="empHomeAddrStreet" [(ngModel)]="employee.empHomeAddrStreet" matInput>
             </mat-form-field>
         </div>
         <div>
             <mat-form-field class="fieldLength">
                 <mat-label>District</mat-label>
-                <input formControlName="empHomeAddrDistrict" [(ngModel)]="this.employee.empHomeAddrDistrict" matInput>
+                <input formControlName="empHomeAddrDistrict" [(ngModel)]="employee.empHomeAddrDistrict" matInput>
             </mat-form-field>
         </div>
         <div>
             <mat-form-field class="fieldLength">
                 <mat-label>State</mat-label>
-                <input formControlName="empHomeAddrState" [(ngModel)]="this.employee.empHomeAddrState" matInput>
+                <input formControlName="empHomeAddrState" [(ngModel)]="employee.empHomeAddrState" matInput>
             </mat-form-field>
         </div>
         
@@ -97,7 +97,7 @@
             <mat-label>Date of Joining</mat-label>
             <input [max]="today" matInput 
             [matDatepicker]="datepicker" 
-            [(ngModel)]="this.employee.empDateOfJoining"
+            [(ngModel)]="empDoj"
             formControlName="empDateOfJoining">
             <mat-datepicker-toggle matIconSuffix [for]="datepicker"></mat-datepicker-toggle>
             <mat-datepicker #datepicker>
@@ -108,7 +108,7 @@
         <div>
             <mat-form-field class="fieldLength">
                 <mat-label>Country</mat-label>
-                <input formControlName="empHomeAddrCountry" [(ngModel)]="this.employee.empHomeAddrCountry" matInput>
+                <input formControlName="empHomeAddrCountry" [(ngModel)]="employee.empHomeAddrCountry" matInput>
             </mat-form-field>
         </div>
         <div>
@@ -116,7 +116,7 @@
                 <mat-label>Pincode</mat-label>
                 <input formControlName="empHomeAddrPinCode" 
                 matInput 
-                [(ngModel)]="this.employee.empHomeAddrPinCode"
+                [(ngModel)]="employee.empHomeAddrPinCode"
                 (keypress)="numberOnly($event)">
             </mat-form-field>
         </div>

@@ -9,7 +9,7 @@ import { EmployeeService } from 'src/app/service/employee.service';
 })
 export class DeleteModalComponent {
   public deletedEmployee: any;
-  public customers: any;
+  public employees: any;
   public errorMessage!:string;
   constructor(@Inject(MAT_DIALOG_DATA) public data:any,
   private dialogRef: MatDialogRef<DeleteModalComponent>,
@@ -22,7 +22,7 @@ export class DeleteModalComponent {
   }
   getAllEmployees(){
     this.employeeService.getAllEmployees().subscribe((data)=>{
-      this.customers = data;
+      this.employees = data;
     },(error)=>{
       this.errorMessage = error;
     })

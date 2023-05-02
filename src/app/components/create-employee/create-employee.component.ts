@@ -3,6 +3,7 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Employee } from 'src/app/models/Employee';
 import { EmployeeService } from 'src/app/service/employee.service';
+import { DatePipe } from '@angular/common'
 
 
 @Component({
@@ -23,12 +24,12 @@ export class CreateEmployeeComponent {
   public emptyEmail:boolean = false;
   public errorMessage!:string;
   public employee : Employee = {} as Employee
-  today =new Date();
-
+  today = new Date();
   constructor(
     private employeeService: EmployeeService,
     private router: Router,
-    private builder: FormBuilder){}
+    private builder: FormBuilder,
+    public datepipe: DatePipe){}
     employeeForm = this.builder.group({
       empFirstName:this.builder.control('',Validators.required),
       empLastName:this.builder.control('',Validators.required),
@@ -58,7 +59,6 @@ export class CreateEmployeeComponent {
 
   }
   submitCreate(){
-  
     this.emptyFirstName = this.employeeForm.value.empFirstName === "" ? true : false;
     this.emptyLastName = this.employeeForm.value.empLastName === "" ? true : false;
     this.emptyPhone = this.employeeForm.value.empPhoneNumber === "" ? true : false;
@@ -69,11 +69,12 @@ export class CreateEmployeeComponent {
         this.employees = data;
         this.userEmailExists = this.employees.some((user:any) => user.empEmailId === this.employeeForm.value.empEmailId);
         this.userPhoneExists = this.employees.some((user:any) => user.empPhoneNumber === this.employeeForm.value.empPhoneNumber);
-        debugger
         if(!this.userEmailExists && !this.userPhoneExists){
-          this.employeeService.createEmployee(this.employeeForm.value).subscribe(data => {
+          this.employeeForm.value.empDateOfBirth = this.datepipe.transform(this.employeeForm.value.empDateOfBirth, 'dd-MM-yyyy');
+          this.employeeForm.value.empDateOfJoining = this.datepipe.transform(this.employeeForm.value.empDateOfJoining, 'dd-MM-yyyy');
+          this.employeeService.createEmployee(this.employeeForm.value).subscribe(emp => {
          this.router.navigate(['/']).then();
-         this.employee = data;
+         this.employee = emp;
        },(error)=>{
          this.errorMessage = error;
          this.router.navigateByUrl('/employee/add');

@@ -46,7 +46,6 @@ export class ViewEmployeeComponent {
     if(this.employeeId){
       this.employeeService.GetEmployeeById(this.employeeId).subscribe((data: any)=> {
         this.employee = data;
-        debugger
         console.log(this.employee);
       },(error)=>{
         this.errorMessage = error;

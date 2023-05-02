@@ -8,9 +8,9 @@ export interface Employee {
     empPhoneNumber: string;
     empHomeAddrLine1: string;
     empHomeAddrLine2: string;
-    empHomeAddrStreet:string;
-    empHomeAddrDistrict:string;
-    empHomeAddrState:string;
+    empHomeAddrStreet: string;
+    empHomeAddrDistrict: string;
+    empHomeAddrState: string;
     empDateOfBirth: string;
     empHomeAddrCountry: string;
     empHomeAddrPinCode: string;

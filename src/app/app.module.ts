@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { DatePipe } from '@angular/common'
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -26,6 +27,8 @@ import { MatSortModule } from '@angular/material/sort';
 import { MatSelectModule } from '@angular/material/select';
 import { ViewEmployeeComponent } from './components/view-employee/view-employee.component';
 import { CreateEmployeeComponent } from './components/create-employee/create-employee.component';
+import { MatButtonModule } from '@angular/material/button';
+
 
 
 @NgModule({
@@ -58,9 +61,11 @@ import { CreateEmployeeComponent } from './components/create-employee/create-emp
     MatInputModule,
     MatSortModule,
     ReactiveFormsModule,
-    MatSelectModule
+    MatSelectModule,
+    MatButtonModule,
+    DatePipe
   ],
-  providers: [],
+  providers: [DatePipe],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

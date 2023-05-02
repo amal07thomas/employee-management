@@ -35,7 +35,6 @@
             <mat-form-field appearance="fill" class="datePicker">
                 <mat-label>Date of Birth</mat-label>
                 <input  [max]="today" matInput
-                [matDatepicker]="datepicker" 
                 [(ngModel)]="employee.empDateOfBirth"
                 readonly="true"
                 formControlName="empDateOfBirth">
@@ -43,12 +42,6 @@
                 </mat-datepicker>
               </mat-form-field>
             </div>
-         <!-- <div>
-            <mat-form-field class="fieldLength">
-             <mat-label>Date of Birth</mat-label>
-             <input formControlName="empDateOfBirth" [(ngModel)]="employee.empDateOfBirth" readonly="true" matInput>
-            </mat-form-field>
-         </div> -->
         <div>
             <mat-form-field class="fieldLength">
                 <mat-label>Phone</mat-label>
@@ -109,7 +102,6 @@
         <mat-form-field appearance="fill" class="datePicker">
             <mat-label>Date of Joining</mat-label>
             <input  [max]="today" matInput
-            [matDatepicker]="datepicker" 
             [(ngModel)]="employee.empDateOfJoining"
             readonly="true"
             formControlName="empDateOfJoining">

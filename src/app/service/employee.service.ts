@@ -7,28 +7,28 @@ import { catchError, Observable, throwError } from 'rxjs';
 })
 export class EmployeeService {
 
-  public serverUrl: string = 'http://localhost:3000'; // json server url
-  // public serverUrl: string = 'http://15.207.222.215:8080';
+  // public serverUrl: string = 'http://localhost:3000'; // json server url
+  public serverUrl: string = 'http://15.207.222.215:8080/api';
   constructor(private httpClient: HttpClient) { }
 
   public getAllEmployees(): Observable<any[]>{
-    let dataUrl: string = `${this.serverUrl}/employee`;
+    let dataUrl: string = `${this.serverUrl}/employees`;
     return this.httpClient.get<any[]>(dataUrl).pipe(catchError(this.handleError));
   }
   public deleteEmployee(employeeId: string): Observable<{}>{
-    let dataUrl: string = `${this.serverUrl}/employee/${employeeId}`;
+    let dataUrl: string = `${this.serverUrl}/employees/${employeeId}`;
     return this.httpClient.delete<{}>(dataUrl).pipe(catchError(this.handleError));
   }
   public updateEmployee(employee: any,employeeId: number): Observable<any>{
-    let dataUrl: string = `${this.serverUrl}/employee/${employeeId}`;
+    let dataUrl: string = `${this.serverUrl}/employees/${employeeId}`;
     return this.httpClient.put<any>(dataUrl,employee).pipe(catchError(this.handleError));
   }
   public GetEmployeeById(employeeId: string): Observable<any>{
-    let dataUrl = `${this.serverUrl}/employee/${employeeId}`;
+    let dataUrl = `${this.serverUrl}/employees/${employeeId}`;
     return this.httpClient.get<any>(dataUrl).pipe(catchError(this.handleError));
   }
-  public createEmployee(employee: any): Observable<any>{
-    let dataUrl: string = `${this.serverUrl}/employee`;
+  public createEmployee(employee: any): Observable<any>{  
+    let dataUrl: string = `${this.serverUrl}/employees`;
     return this.httpClient.post<any>(dataUrl,employee).pipe(catchError(this.handleError));
   }
   
