@@ -2,7 +2,7 @@
 <div class="container mt-3">
     <div class="row">
         <div class="col">
-            <p class="h5 fw-bold text-danger">Update Employee</p>
+            <p class="h5 fw-bold text-danger">Update Employee Details</p>
         </div>
     </div>
 </div>
@@ -13,12 +13,14 @@
            <mat-form-field class="fieldLength">
             <mat-label>First Name</mat-label>
             <input formControlName="empFirstName" [(ngModel)]="employee.empFirstName"  matInput>
+            <mat-error *ngIf="emptyFirstName">First Name Required</mat-error>
            </mat-form-field>
         </div>
         <div>
             <mat-form-field class="fieldLength">
              <mat-label>Last Name</mat-label>
              <input formControlName="empLastName" [(ngModel)]="employee.empLastName" matInput>
+             <mat-error *ngIf="emptyLastName">Last Name Required</mat-error>
             </mat-form-field>
          </div>
         <div>
@@ -27,6 +29,7 @@
                 <mat-select formControlName="empGender" [(ngModel)]="employee.empGender">
                     <mat-option *ngFor="let item of genderList" [value]="item">{{item}}</mat-option>
                 </mat-select>
+                <mat-error *ngIf="emptyGender">Gender Required</mat-error>
             </mat-form-field>
         </div>
         <div>
@@ -37,6 +40,7 @@
                 [(ngModel)]="empDob">
                 <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
                 <mat-datepicker #picker></mat-datepicker>
+                <mat-error *ngIf="emptyDob">Date of Birth Required</mat-error>
             </mat-form-field>
         </div>
         <div >
@@ -48,6 +52,7 @@
                 minlength="10" 
                 [(ngModel)]="employee.empPhoneNumber"
                 matInput>
+                <mat-error *ngIf="emptyPhone">Phone Number Required</mat-error>
             </mat-form-field>
         </div>
         <div>
@@ -55,6 +60,7 @@
                 <mat-label>Email</mat-label>
                 <input formControlName="empEmailId"  [(ngModel)]="employee.empEmailId" matInput>
             </mat-form-field>
+            <mat-error *ngIf="emptyEmail">Email Required</mat-error>
         </div>
        
         <div>
@@ -63,6 +69,7 @@
                 <input formControlName="empHomeAddrLine1"  
                 [(ngModel)]="employee.empHomeAddrLine1"
                 matInput>
+                <mat-error *ngIf="emptyAddress1">Address1 Required</mat-error>
             </mat-form-field>
         </div>
     </div>
@@ -77,18 +84,21 @@
             <mat-form-field class="fieldLength">
                 <mat-label>Street</mat-label>
                 <input formControlName="empHomeAddrStreet" [(ngModel)]="employee.empHomeAddrStreet" matInput>
+                <mat-error *ngIf="emptyStreet">Street Required</mat-error>
             </mat-form-field>
         </div>
         <div>
             <mat-form-field class="fieldLength">
                 <mat-label>District</mat-label>
                 <input formControlName="empHomeAddrDistrict" [(ngModel)]="employee.empHomeAddrDistrict" matInput>
+                <mat-error *ngIf="emptyDistrict">District Required</mat-error>
             </mat-form-field>
         </div>
         <div>
             <mat-form-field class="fieldLength">
                 <mat-label>State</mat-label>
                 <input formControlName="empHomeAddrState" [(ngModel)]="employee.empHomeAddrState" matInput>
+                <mat-error *ngIf="emptyState">State Required</mat-error>
             </mat-form-field>
         </div>
         
@@ -102,6 +112,7 @@
             <mat-datepicker-toggle matIconSuffix [for]="datepicker"></mat-datepicker-toggle>
             <mat-datepicker #datepicker>
             </mat-datepicker>
+            <mat-error *ngIf="emptyDoj">Date of Joining Required</mat-error>
           </mat-form-field>
         </div>
         
@@ -109,6 +120,7 @@
             <mat-form-field class="fieldLength">
                 <mat-label>Country</mat-label>
                 <input formControlName="empHomeAddrCountry" [(ngModel)]="employee.empHomeAddrCountry" matInput>
+                <mat-error *ngIf="emptyCountry">Country Required</mat-error>
             </mat-form-field>
         </div>
         <div>
@@ -118,6 +130,7 @@
                 matInput 
                 [(ngModel)]="employee.empHomeAddrPinCode"
                 (keypress)="numberOnly($event)">
+                <mat-error *ngIf="emptyPinCode">Pincode Required</mat-error>
             </mat-form-field>
         </div>
     </div>

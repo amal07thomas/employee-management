@@ -5,14 +5,12 @@ import { Employee } from 'src/app/models/Employee';
 import { EmployeeService } from 'src/app/service/employee.service';
 import { DatePipe } from '@angular/common'
 
-
 @Component({
   selector: 'app-create-employee',
   templateUrl: './create-employee.component.html',
   styleUrls: ['./create-employee.component.scss']
 })
 export class CreateEmployeeComponent {
-  public selectedItem = 'Male';
   public genderList:any;
   public msg!: string;
   public employees: any;
@@ -22,6 +20,15 @@ export class CreateEmployeeComponent {
   public emptyLastName:boolean = false;
   public emptyPhone:boolean = false;
   public emptyEmail:boolean = false;
+  public emptyGender:any = false;
+  public emptyDob: boolean = false;
+  public emptyDoj: boolean = false;
+  public emptyAddress1: boolean = false;
+  public emptyStreet: boolean = false;
+  public emptyDistrict: boolean = false;
+  public emptyState: boolean = false;
+  public emptyCountry: boolean = false;
+  public emptyPinCode: boolean = false;
   public errorMessage!:string;
   public employee : Employee = {} as Employee
   today = new Date();
@@ -33,22 +40,21 @@ export class CreateEmployeeComponent {
     employeeForm = this.builder.group({
       empFirstName:this.builder.control('',Validators.required),
       empLastName:this.builder.control('',Validators.required),
-      empGender: [[], Validators.nullValidator],
+      empGender: [[], Validators.required],
       empPhoneNumber: this.builder.control('',Validators.required),
       empEmailId: ['', [Validators.required, Validators.email,Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$')]],
-      empDateOfBirth: this.builder.control('',Validators.nullValidator),
-      empHomeAddrLine1: this.builder.control('',Validators.nullValidator),
+      empDateOfBirth: this.builder.control('',Validators.required),
+      empHomeAddrLine1: this.builder.control('',Validators.required),
       empHomeAddrLine2: this.builder.control('',Validators.nullValidator),
-      empHomeAddrStreet: this.builder.control('',Validators.nullValidator),
-      empHomeAddrDistrict: this.builder.control('',Validators.nullValidator),
-      empHomeAddrState: this.builder.control('',Validators.nullValidator),
-      empDateOfJoining: this.builder.control('',Validators.nullValidator),
-      empHomeAddrCountry: this.builder.control('',Validators.nullValidator),
-      empHomeAddrPinCode: this.builder.control('',Validators.nullValidator),
-
+      empHomeAddrStreet: this.builder.control('',Validators.required),
+      empHomeAddrDistrict: this.builder.control('',Validators.required),
+      empHomeAddrState: this.builder.control('',Validators.required),
+      empDateOfJoining: this.builder.control('',Validators.required),
+      empHomeAddrCountry: this.builder.control('',Validators.required),
+      empHomeAddrPinCode: this.builder.control('',Validators.required),
     });
   ngOnInit(){
-   this.genderList = ['Male','Female','Other'];
+   this.genderList = ['MALE','FEMALE','OTHER'];
   }
   numberOnly(event:any): boolean {
     const charCode = (event.which) ? event.which : event.keyCode;
@@ -56,14 +62,22 @@ export class CreateEmployeeComponent {
       return false;
     }
     return true;
-
   }
   submitCreate(){
     this.emptyFirstName = this.employeeForm.value.empFirstName === "" ? true : false;
     this.emptyLastName = this.employeeForm.value.empLastName === "" ? true : false;
     this.emptyPhone = this.employeeForm.value.empPhoneNumber === "" ? true : false;
     this.emptyEmail = this.employeeForm.value.empEmailId === "" ? true : false;
-    console.log(this.employeeForm.value);
+    this.emptyDob = this.employeeForm.value.empDateOfBirth === "" ? true : false;
+    this.emptyDoj = this.employeeForm.value.empDateOfJoining === "" ? true : false;
+    this.emptyGender = this.employeeForm.value.empGender;
+    this.emptyGender = this.emptyGender.length > 0 ? false : true;
+    this.emptyAddress1 = this.employeeForm.value.empHomeAddrLine1 === "" ? true : false;
+    this.emptyStreet = this.employeeForm.value.empHomeAddrStreet === "" ? true : false;
+    this.emptyDistrict = this.employeeForm.value.empHomeAddrDistrict === "" ? true : false;
+    this.emptyState = this.employeeForm.value.empHomeAddrState === "" ? true : false;
+    this.emptyCountry = this.employeeForm.value.empHomeAddrCountry === "" ? true : false;
+    this.emptyPinCode = this.employeeForm.value.empHomeAddrPinCode === "" ? true : false;
     if(this.employeeForm.status === 'VALID'){
       this.employeeService.getAllEmployees().subscribe(data => {
         this.employees = data;
@@ -83,9 +97,6 @@ export class CreateEmployeeComponent {
          return;
        }
       });
-      
-    
   }
 }
-
 }

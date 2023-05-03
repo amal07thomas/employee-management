@@ -18,6 +18,19 @@ export class EditEmployeeComponent {
   public today =new Date();
   public empDob:any;
   public empDoj:any;
+  public emptyFirstName:boolean = false;
+  public emptyLastName:boolean = false;
+  public emptyPhone:boolean = false;
+  public emptyEmail:boolean = false;
+  public emptyGender:any = false;
+  public emptyDob: boolean = false;
+  public emptyDoj: boolean = false;
+  public emptyAddress1: boolean = false;
+  public emptyStreet: boolean = false;
+  public emptyDistrict: boolean = false;
+  public emptyState: boolean = false;
+  public emptyCountry: boolean = false;
+  public emptyPinCode: boolean = false;
   constructor(private activeRoute : ActivatedRoute,
     private employeeService: EmployeeService,
     private router: Router,
@@ -29,15 +42,15 @@ export class EditEmployeeComponent {
       empGender: [[], Validators.nullValidator],
       empPhoneNumber: this.builder.control('',Validators.required),
       empEmailId: ['', [Validators.required, Validators.email,Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$')]],
-      empDateOfBirth: this.builder.control('',Validators.nullValidator),
-      empHomeAddrLine1: this.builder.control('',Validators.nullValidator),
+      empDateOfBirth: this.builder.control('',Validators.required),
+      empHomeAddrLine1: this.builder.control('',Validators.required),
       empHomeAddrLine2: this.builder.control('',Validators.nullValidator),
-      empHomeAddrStreet: this.builder.control('',Validators.nullValidator),
-      empHomeAddrDistrict: this.builder.control('',Validators.nullValidator),
-      empHomeAddrState: this.builder.control('',Validators.nullValidator),
-      empDateOfJoining: this.builder.control('',Validators.nullValidator),
-      empHomeAddrCountry: this.builder.control('',Validators.nullValidator),
-      empHomeAddrPinCode: this.builder.control('',Validators.nullValidator),
+      empHomeAddrStreet: this.builder.control('',Validators.required),
+      empHomeAddrDistrict: this.builder.control('',Validators.required),
+      empHomeAddrState: this.builder.control('',Validators.required),
+      empDateOfJoining: this.builder.control('',Validators.required),
+      empHomeAddrCountry: this.builder.control('',Validators.required),
+      empHomeAddrPinCode: this.builder.control('',Validators.required),
     });
   ngOnInit(){
     this.genderList = ['MALE','FEMALE','OTHER'];
@@ -47,7 +60,6 @@ export class EditEmployeeComponent {
     if(this.employeeId){
       this.employeeService.GetEmployeeById(this.employeeId).subscribe((data: any)=> {
         this.employee = data;
-        if(this.employeeForm.value.empDateOfBirth){}
         this.empDob = new Date(this.employee.empDateOfBirth);
         this.empDoj = new Date(this.employee.empDateOfJoining);
       },(error)=>{
@@ -64,6 +76,21 @@ export class EditEmployeeComponent {
   }
   updateEmployee(){
     if(this.employeeId){
+      this.emptyFirstName = this.employeeForm.value.empFirstName === "" ? true : false;
+      this.emptyLastName = this.employeeForm.value.empLastName === "" ? true : false;
+      this.emptyPhone = this.employeeForm.value.empPhoneNumber === "" ? true : false;
+      this.emptyEmail = this.employeeForm.value.empEmailId === "" ? true : false;
+      this.emptyDob = this.employeeForm.value.empDateOfBirth === "" ? true : false;
+      this.emptyDoj = this.employeeForm.value.empDateOfJoining === "" ? true : false;
+      this.emptyGender = this.employeeForm.value.empGender;
+      this.emptyGender = this.emptyGender.length > 0 ? false : true;
+      this.emptyAddress1 = this.employeeForm.value.empHomeAddrLine1 === "" ? true : false;
+      this.emptyStreet = this.employeeForm.value.empHomeAddrStreet === "" ? true : false;
+      this.emptyDistrict = this.employeeForm.value.empHomeAddrDistrict === "" ? true : false;
+      this.emptyState = this.employeeForm.value.empHomeAddrState === "" ? true : false;
+      this.emptyCountry = this.employeeForm.value.empHomeAddrCountry === "" ? true : false;
+      this.emptyPinCode = this.employeeForm.value.empHomeAddrPinCode === "" ? true : false;
+    
       this.employeeForm.value.empDateOfBirth = this.datepipe.transform(this.employeeForm.value.empDateOfBirth, 'dd-MM-yyyy');
       this.employeeForm.value.empDateOfJoining = this.datepipe.transform(this.employeeForm.value.empDateOfJoining, 'dd-MM-yyyy');
       this.employeeService.updateEmployee(this.employeeForm.value,this.employeeId).subscribe((data: any)=> {
